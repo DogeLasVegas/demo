@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表滚动DEMO</title>
+    <style>
+        #demo{
+            width: 200px;
+            text-align: center;
+        }
+        #scrollDiv{
+            height: 300px;
+            overflow: hidden;
+        }
+        ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        button{
+            display: inline-block;
+            width: 200px;
+            height: 12px;
+            position: relative;
+            cursor: pointer;
+        }
+        #btn1:after {
+            position: absolute;
+            left: 96px;
+            top: 2px;
+            width: 0;
+            height: 0;
+            content: "";
+            border-width: 0 10px 6px 10px;
+            border-style: solid;
+            border-color: #F5F5F5 transparent;
+        }
+        #btn1:before {
+            position: absolute;
+            left: 94px;
+            top: 0;
+            width: 0;
+            height: 0;
+            content: "";
+            border-width: 0 12px 8px 12px;
+            border-style: solid;
+            border-color: #707070 transparent;
+        }
+        #btn2:after {
+            position: absolute;
+            left: 96px;
+            top: 0;
+            width: 0;
+            height: 0;
+            content: "";
+            border-width: 6px 10px 0 10px;
+            border-style: solid;
+            border-color: #F5F5F5 transparent;
+        }
+        #btn2:before {
+            position: absolute;
+            left: 94px;
+            top: 0;
+            width: 0;
+            height: 0;
+            content: "";
+            border-width: 8px 12px 0 12px;
+            border-style: solid;
+            border-color: #707070 transparent;
+        }
+    </style>
+</head>
+<body>
+    <h3> 列表滚动DEMO：</h3> 
+    <div id="demo">
+        <button id="btn1"></button>
+        <div id="scrollDiv"> 
+            <ul> 
+            <li>这是列表项的第1个</li> 
+            <li>这是列表项的第2个</li> 
+            <li>这是列表项的第3个</li> 
+            <li>这是列表项的第4个</li> 
+            <li>这是列表项的第5个</li> 
+            <li>这是列表项的第6个</li> 
+            <li>这是列表项的第7个</li> 
+            <li>这是列表项的第8个</li> 
+            <li>这是列表项的第9个</li> 
+            <li>这是列表项的第10个</li> 
+            <li>这是列表项的第11个</li> 
+            <li>这是列表项的第12个</li> 
+            <li>这是列表项的第13个</li> 
+            <li>这是列表项的第14个</li> 
+            <li>这是列表项的第15个</li> 
+            <li>这是列表项的第16个</li> 
+            <li>这是列表项的第17个</li> 
+            <li>这是列表项的第18个</li> 
+            <li>这是列表项的第19个</li> 
+            <li>这是列表项的第20个</li> 
+            <li>这是列表项的第21个</li> 
+            <li>这是列表项的第22个</li> 
+            <li>这是列表项的第23个</li> 
+            <li>这是列表项的第24个</li> 
+            <li>这是列表项的第25个</li> 
+            <li>这是列表项的第26个</li> 
+            <li>这是列表项的第27个</li> 
+            <li>这是列表项的第28个</li> 
+            <li>这是列表项的第29个</li> 
+            <li>这是列表项的第30个</li> 
+            <li>这是列表项的第31个</li> 
+            <li>这是列表项的第32个</li> 
+            </ul> 
+        </div>  
+        <button id="btn2"></button> 
+    </div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+(function ($) {
+    $.fn.extend({
+    Scroll: function (opt, callback) {
+            if (!opt) var opt = {};
+            var _btnUp = $("#" + opt.up); //Shawphy:向上按钮      
+            var _btnDown = $("#" + opt.down); //Shawphy:向下按钮   
+            var height = opt.height ? parseInt(opt.height, 10) : 100; //每次滚动的行数，默认为一屏，即父容器高度
+            var speed = opt.speed ? parseInt(opt.speed, 10) : 600; //卷动速度，数值越大，速度越慢（毫秒）
+                    
+            function up(){
+                if (!$("#scrollDiv").is(":animated")) {
+                    $("#scrollDiv").animate({scrollTop:$("#scrollDiv").scrollTop()-height},speed)
+                }
+            }
+            function down(){
+                if (!$("#scrollDiv").is(":animated")) {
+                    $("#scrollDiv").animate({scrollTop:$("#scrollDiv").scrollTop()+height},speed)
+                }
+            }
+            _btnUp.bind("click", down);
+            _btnDown.bind("click", up);
+    }
+    });
+})(jQuery);
+$(function () {
+    $("#scrollDiv").Scroll({ height: 100, speed: 800,up: "btn2", down: "btn1" });
+});
+
+</script>
+</html>
